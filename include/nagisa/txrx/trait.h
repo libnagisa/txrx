@@ -23,3 +23,5 @@ using details::is_unique_v;
 
 NAGISA_BUILD_LIB_END
 
+
+#include <nagisa/build_lib/destruct.h>

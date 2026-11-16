@@ -2,6 +2,6 @@
 
 #include <cstddef>
 #include <cstdint>
-#include <numeric>
+#include <limits>
 
 #include <nagisa/txrx/environment.h>

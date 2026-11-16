@@ -1,0 +1,18 @@
+default_configuration = "debug"
+
+[[rules]]
+configuration = "debug"
+compile_commands = ["build/x86_64-linux-gnu-clang-debug", "build/x86_64-windows-msvc-clang-cl-debug", "build/x86_64-windows-gnu-clang-debug"]
+
+[[rules]]
+configuration = "release"
+compile_commands = ["build/x86_64-linux-gnu-clang-release", "build/x86_64-windows-msvc-clang-cl-release", "build/x86_64-windows-gnu-clang-release"]
+
+[[rules]]
+patterns = ["**/*"]
+default_command = "clang++ -std=c++26 -I${workspace}/include"
+# append = ["-isystem", "${workspace}"]
+
+[[rules]]
+patterns = ["**/native/esp/*"]
+

@@ -13,4 +13,10 @@ inline constexpr struct bottom_t{
     constexpr bool operator==(bottom_t const&) const noexcept = default;
 } bottom{};
 
+template<class T>
+concept infinite_error_port = localized_v<T> == infinite_error;
+
+template<class T>
+concept finite_error_port = !infinite_error_port<T>;
+
 NAGISA_BUILD_LIB_DETAIL_END
