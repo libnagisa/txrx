@@ -4,9 +4,9 @@
 
 NAGISA_BUILD_LIB_DETAIL_BEGIN
 
-namespace send_pack_cpo
+namespace outgoing_pack_cpo
 {
-	void send_pack();
+	void outgoing_pack();
 
 	enum class choose
 	{
@@ -22,16 +22,16 @@ namespace send_pack_cpo
 
 	constexpr choice_result choice(auto&& target, auto&&... args) noexcept
 	{
-		if constexpr (requires { ::std::forward<decltype(target)>(target).send_pack(::std::forward<decltype(args)>(args)...); })
-			return { choose::member, noexcept(::std::forward<decltype(target)>(target).send_pack(::std::forward<decltype(args)>(args)...)) };
-		else if constexpr (requires { send_pack(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...); })
-			return { choose::adl, noexcept(send_pack(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...)) };
+		if constexpr (requires { ::std::forward<decltype(target)>(target).outgoing_pack(::std::forward<decltype(args)>(args)...); })
+			return { choose::member, noexcept(::std::forward<decltype(target)>(target).outgoing_pack(::std::forward<decltype(args)>(args)...)) };
+		else if constexpr (requires { outgoing_pack(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...); })
+			return { choose::adl, noexcept(outgoing_pack(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...)) };
 		else
 			return { choose::none, true };
 	}
 }
 
-struct send_pack_t
+struct outgoing_pack_t
 {
 	constexpr
 #if __cpp_static_call_operator
@@ -41,24 +41,24 @@ struct send_pack_t
 #if !__cpp_static_call_operator
 		const
 #endif
-		noexcept(send_pack_cpo::choice(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...).nothrow)
-		requires (send_pack_cpo::choice(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...).strategy != send_pack_cpo::choose::none)
+		noexcept(outgoing_pack_cpo::choice(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...).nothrow)
+		requires (outgoing_pack_cpo::choice(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...).strategy != outgoing_pack_cpo::choose::none)
 	{
-		constexpr auto strategy = send_pack_cpo::choice(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...).strategy;
-		if constexpr (strategy == send_pack_cpo::choose::member)
-			return ::std::forward<decltype(target)>(target).send_pack(::std::forward<decltype(args)>(args)...);
+		constexpr auto strategy = outgoing_pack_cpo::choice(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...).strategy;
+		if constexpr (strategy == outgoing_pack_cpo::choose::member)
+			return ::std::forward<decltype(target)>(target).outgoing_pack(::std::forward<decltype(args)>(args)...);
 		else
 		{
-			using send_pack_cpo::send_pack;
-			return send_pack(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...);
+			using outgoing_pack_cpo::outgoing_pack;
+			return outgoing_pack(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...);
 		}
 	}
 };
-inline constexpr send_pack_t send_pack{};
+inline constexpr outgoing_pack_t outgoing_pack{};
 
-namespace receive_pack_cpo
+namespace incoming_pack_cpo
 {
-	void receive_pack();
+	void incoming_pack();
 
 	enum class choose
 	{
@@ -74,16 +74,16 @@ namespace receive_pack_cpo
 
 	constexpr choice_result choice(auto&& target, auto&&... args) noexcept
 	{
-		if constexpr (requires { ::std::forward<decltype(target)>(target).receive_pack(::std::forward<decltype(args)>(args)...); })
-			return { choose::member, noexcept(::std::forward<decltype(target)>(target).receive_pack(::std::forward<decltype(args)>(args)...)) };
-		else if constexpr (requires { receive_pack(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...); })
-			return { choose::adl, noexcept(receive_pack(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...)) };
+		if constexpr (requires { ::std::forward<decltype(target)>(target).incoming_pack(::std::forward<decltype(args)>(args)...); })
+			return { choose::member, noexcept(::std::forward<decltype(target)>(target).incoming_pack(::std::forward<decltype(args)>(args)...)) };
+		else if constexpr (requires { incoming_pack(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...); })
+			return { choose::adl, noexcept(incoming_pack(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...)) };
 		else
 			return { choose::none, true };
 	}
 }
 
-struct receive_pack_t
+struct incoming_pack_t
 {
 	constexpr
 #if __cpp_static_call_operator
@@ -93,20 +93,20 @@ struct receive_pack_t
 #if !__cpp_static_call_operator
 		const
 #endif
-		noexcept(receive_pack_cpo::choice(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...).nothrow)
-		requires (receive_pack_cpo::choice(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...).strategy != receive_pack_cpo::choose::none)
+		noexcept(incoming_pack_cpo::choice(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...).nothrow)
+		requires (incoming_pack_cpo::choice(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...).strategy != incoming_pack_cpo::choose::none)
 	{
-		constexpr auto strategy = receive_pack_cpo::choice(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...).strategy;
-		if constexpr (strategy == receive_pack_cpo::choose::member)
-			return ::std::forward<decltype(target)>(target).receive_pack(::std::forward<decltype(args)>(args)...);
+		constexpr auto strategy = incoming_pack_cpo::choice(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...).strategy;
+		if constexpr (strategy == incoming_pack_cpo::choose::member)
+			return ::std::forward<decltype(target)>(target).incoming_pack(::std::forward<decltype(args)>(args)...);
 		else
 		{
-			using receive_pack_cpo::receive_pack;
-			return receive_pack(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...);
+			using incoming_pack_cpo::incoming_pack;
+			return incoming_pack(::std::forward<decltype(target)>(target), ::std::forward<decltype(args)>(args)...);
 		}
 	}
 };
-inline constexpr receive_pack_t receive_pack{};
+inline constexpr incoming_pack_t incoming_pack{};
 
 namespace transceive_pack_cpo
 {

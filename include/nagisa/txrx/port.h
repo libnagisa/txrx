@@ -2,17 +2,20 @@
 
 #include "./_port/pack.h"
 #include "./_port/communicate.h"
+#include "./_port/simple_operate.h"
 
 #include "./environment.h"
 
 NAGISA_BUILD_LIB_BEGIN
 
-using details::send_pack;
-using details::receive_pack;
-using details::transceive_pack;
+using details::outgoing_pack;
+using details::incoming_pack;
 
 using details::communicate;
 using details::communicate_range;
+
+using details::send;
+using details::receive;
 
 NAGISA_BUILD_LIB_END
 
