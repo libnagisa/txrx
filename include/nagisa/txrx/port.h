@@ -12,9 +12,7 @@ using details::outgoing_pack;
 using details::send;
 using details::send_range;
 
-using details::incoming_pack;
 using details::receive;
-using details::receive_range;
 
 using details::forward_port;
 

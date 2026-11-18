@@ -24,13 +24,6 @@ struct forward_port
 		return details::outgoing_pack(::std::forward<decltype(self)>(self).forward_port::_port, ::std::forward<decltype(args)>(args)...);
 	}
 
-	constexpr decltype(auto) incoming_pack(this auto&& self, auto&&... args)
-		noexcept(noexcept(details::incoming_pack(::std::forward<decltype(self)>(self).forward_port::_port, ::std::forward<decltype(args)>(args)...)))
-		requires requires { details::incoming_pack(::std::forward<decltype(self)>(self).forward_port::_port, ::std::forward<decltype(args)>(args)...); }
-	{
-		return details::incoming_pack(::std::forward<decltype(self)>(self).forward_port::_port, ::std::forward<decltype(args)>(args)...);
-	}
-
 	constexpr decltype(auto) send(this auto&& self, auto&&... packs)
 		noexcept(noexcept(details::send(::std::forward<decltype(self)>(self).forward_port::_port, ::std::forward<decltype(packs)>(packs)...)))
 		requires requires { details::send(::std::forward<decltype(self)>(self).forward_port::_port, ::std::forward<decltype(packs)>(packs)...); }
@@ -50,13 +43,6 @@ struct forward_port
 		requires requires { details::receive(::std::forward<decltype(self)>(self).forward_port::_port, ::std::forward<decltype(packs)>(packs)...); }
 	{
 		return details::receive(::std::forward<decltype(self)>(self).forward_port::_port, ::std::forward<decltype(packs)>(packs)...);
-	}
-
-	constexpr decltype(auto) receive_range(this auto&& self, auto&&... packs)
-		noexcept(noexcept(details::receive_range(::std::forward<decltype(self)>(self).forward_port::_port, ::std::forward<decltype(packs)>(packs)...)))
-		requires requires { details::receive_range(::std::forward<decltype(self)>(self).forward_port::_port, ::std::forward<decltype(packs)>(packs)...); }
-	{
-		return details::receive_range(::std::forward<decltype(self)>(self).forward_port::_port, ::std::forward<decltype(packs)>(packs)...);
 	}
 };
 

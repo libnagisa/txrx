@@ -1,6 +1,7 @@
 #pragma once
 
 #include <expected>
+#include <functional>
 
 #include "./trait.h"
 
@@ -20,7 +21,7 @@ concept exact_result = requires(T t)
 template<class F, class T>
 concept exact = ::std::invocable<F, T> && requires(F f, T t)
 {
-    { ::std::invoke(::std::forward<decltype(f)>(::std::forward<decltype(t)>(t))) } -> exact_result;
+    { ::std::invoke(::std::forward<decltype(f)>(f), ::std::forward<decltype(t)>(t)) } -> exact_result;
 };
 
 NAGISA_BUILD_LIB_DETAIL_END
