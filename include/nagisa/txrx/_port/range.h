@@ -4,7 +4,7 @@
 
 NAGISA_BUILD_LIB_DETAIL_BEGIN
 
-template<class T>
-inline constexpr bool is_unique_v = false;
+inline constexpr struct range_t{} range{};
 
 NAGISA_BUILD_LIB_DETAIL_END
+
